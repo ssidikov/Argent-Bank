@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import Logo from '../../assets/logo.svg'
+import Logo from '../../assets/logo.png'
 import './Header.sass'
 
 function Header() {
@@ -13,10 +13,7 @@ function Header() {
       <nav className='header-nav'>
         <ul>
           <li>
-            <NavLink to='/'>Main</NavLink>
-          </li>
-          <li>
-            <NavLink to='/About'>About us</NavLink>
+            <NavLink to='/login'>Sign In</NavLink>
           </li>
         </ul>
       </nav>

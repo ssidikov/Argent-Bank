@@ -4,14 +4,13 @@
 .header
   @include flex-container
   justify-content: space-between
-  margin-top: 45px
-  @include tablet-version
-    margin-top: 20px
+  padding: 5px 20px
 
   &-logo
     &__img
       height: 70px
-      max-width: 355px
+      max-width: 200px
+      object-fit: contain
       @include tablet-version
         height: 47px
 
