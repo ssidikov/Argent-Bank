@@ -1,0 +1,42 @@
+@use '../../styles/variables.sass' as *
+@use '../../styles/mixins.sass' as *
+
+.header
+  @include flex-container
+  justify-content: space-between
+  margin-top: 45px
+  @include tablet-version
+    margin-top: 20px
+
+  &-logo
+    &__img
+      height: 70px
+      max-width: 355px
+      @include tablet-version
+        height: 47px
+
+  &-nav
+    ul
+      @include flex-container
+      flex-direction: row
+      justify-content: flex-end
+      list-style: none
+      padding: 0
+      margin: 0
+
+    a
+      text-decoration: none
+      color: $text-color
+      padding: $padding-xs
+      margin: 0 5px
+      font-size: $font-size-md
+      font-weight: 500
+      transition: color $transition-duration
+      @include mobile-version
+        font-size: $font-size-sm
+
+      &:hover
+        color: $primary-color
+
+      &.active
+        border-bottom: 2px solid $text-color

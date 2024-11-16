@@ -1,0 +1,38 @@
+@use '../../styles/variables.sass' as *
+@use '../../styles/mixins.sass' as *
+
+.home
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  margin-bottom: 24px
+  min-height: 100vh
+  background-color: #f0f0f0
+  color: #333
+  font-size: 2rem
+  font-weight: 700
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
+  &__text
+    color: $primary-color
+    font-size: clamp(1rem, 3vw, 3rem)
+    font-weight: 400
+    margin-top: 1rem
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
+  &__content
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 50px
+    text-align: center
+    margin-bottom: 24px
+    @include tablet-version
+      gap: 50px
+    &-text
+      color: $primary-color
+      font-size: clamp(0.7rem, 2vw, 2rem)
+      margin: 0 auto
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
+      color: $black
+      font-size: clamp(0.7rem, 1vw + 0.5rem, 1.25rem)
