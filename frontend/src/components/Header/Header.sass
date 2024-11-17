@@ -6,16 +6,18 @@
   justify-content: space-between
   padding: 5px 20px
 
-  &-logo
-    &__img
-      height: 70px
+  &__logo
+    &-img
+      height: 54px
       max-width: 200px
       object-fit: contain
       @include tablet-version
         height: 47px
 
-  &-nav
-    ul
+  &__nav
+    &-item
+      margin-right: 0.5rem
+    &-list
       @include flex-container
       flex-direction: row
       justify-content: flex-end
@@ -23,12 +25,15 @@
       padding: 0
       margin: 0
 
-    a
+    &-link
+      display: flex
+      justify-content: space-between
+      align-items: center
       text-decoration: none
       color: $text-color
       margin: 0 5px
       font-size: 1rem
-      font-weight: 500
+      font-weight: 700
       transition: color $transition-duration
       @include mobile-version
         font-size: 0.75rem
@@ -39,3 +44,9 @@
 
       &.active
         border-bottom: 2px solid $text-color
+
+      &-icon
+        margin-right: 5px
+        width: 16px
+        @include mobile-version
+          width: 20px
