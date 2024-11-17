@@ -9,6 +9,7 @@ function Header() {
       <div className='header__logo'>
         <NavLink to='/' className='header__logo-link'>
           <img src={Logo} alt='Argent-bank' className='header__logo-img' />
+          <h1 className='sr-only'>Argent Bank</h1>
         </NavLink>
       </div>
       <nav className='header__nav'>
