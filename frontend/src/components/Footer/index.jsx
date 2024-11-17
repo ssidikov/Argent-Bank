@@ -1,4 +1,3 @@
-import Logo from '../../assets/logo.png'
 import './Footer.sass'
 
 function Footer() {
@@ -6,11 +5,7 @@ function Footer() {
 
   return (
     <footer className='footer'>
-      <img src={Logo} alt='Awesome-logo' className='footer-logo' />
-      <div className='footer-right'>
-        <p className='footer-text'>Developer Sardorbek SIDIKOV</p>
-        <p className='footer-text'>&copy; {currentYear} Awesome-React. All rights reserved.</p>
-      </div>
+      <p className='footer-text'>&copy; {currentYear} Awesome-React. All rights reserved.</p>
     </footer>
   )
 }

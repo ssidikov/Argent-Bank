@@ -11,14 +11,12 @@ function App() {
     <HashRouter>
       <div className='app-container'>
         <Header />
-        <main className='content-wrapper'>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='*' element={<Error />} />
-          </Routes>
-        </main>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='*' element={<Error />} />
+        </Routes>
         <Footer />
       </div>
     </HashRouter>
