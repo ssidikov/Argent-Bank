@@ -17,19 +17,18 @@
     color: red
     font-size: clamp(4rem, 10vw, 14rem)
     // font-weight: 700
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
     // @include tablet-version
     //   margin-top: 113px
+  &__number, &__text, &__link
+    text-shadow: $text-shadow
   &__text
     color: $primary-color
     font-size: clamp(0.7rem, 2vw, 2rem)
     margin: 0 auto
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
     color: $black
     font-size: clamp(0.7rem, 1vw + 0.5rem, 1.25rem)
     text-decoration: none
     font-weight: bold
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
     &:hover
       color: red
   &__link
@@ -37,6 +36,5 @@
     font-size: clamp(0.7rem, 1vw + 0.5rem, 1.25rem)
     text-decoration: none
     font-weight: bold
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5)
     &:hover
       color: $primary-color

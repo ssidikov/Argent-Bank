@@ -5,7 +5,7 @@ function Footer() {
 
   return (
     <footer className='footer'>
-      <p className='footer-text'>&copy; {currentYear} Awesome-React. All rights reserved.</p>
+      <p className='footer-text'>Copyright {currentYear} Argent Bank</p>
     </footer>
   )
 }
