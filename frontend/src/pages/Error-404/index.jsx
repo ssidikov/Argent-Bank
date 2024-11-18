@@ -1,7 +1,11 @@
 import ErrorMessage from '../../components/ErrorMessage'
 
 function Error404() {
-  return <ErrorMessage />
+  return (
+    <main className='error'>
+      <ErrorMessage />
+    </main>
+  )
 }
 
 export default Error404

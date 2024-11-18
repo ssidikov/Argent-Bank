@@ -1,3 +1,5 @@
+@use '../../styles/variables.sass' as *
+
 .login
   &-title
     text-align: center
@@ -36,12 +38,13 @@
       margin-right: 0.5rem
 
   &-button
-    display: block
     width: 100%
     padding: 8px
     font-size: 1.1rem
     font-weight: bold
     margin-top: 1rem
-    border-color: #00bc77
-    background-color: #00bc77
+    border-color: $primary-color
+    background-color: $primary-color
     color: #fff
+    border-width: 0px
+    cursor: pointer
