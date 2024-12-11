@@ -2,7 +2,6 @@
 @use './mixins' as *
 
 *
-  // box-sizing: border-box
   margin: 0
   padding: 0
 
@@ -23,9 +22,6 @@ body
   -webkit-font-smoothing: antialiased
   text-align: center
 
-  // parameter for css debugging
-  // border: 2px solid red
-
   header, footer
     padding-left: 20px
     padding-right: 20px
@@ -41,8 +37,10 @@ body
 
   header, main
     margin: 0 auto
-    // max-width: 1440px
     width: 100%
+
+  button
+    cursor: pointer
 
 .sr-only
   border: 0

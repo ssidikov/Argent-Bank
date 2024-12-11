@@ -1,21 +1,22 @@
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
-import Login from '../pages/Login'
+import SignIn from '../pages/SignIn'
 import Profile from '../pages/Profile'
-import Error from '../pages/Error-404'
+import Error404 from '../pages/Error-404'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import logo from '../assets/logo.png'
 
 function App() {
   return (
     <HashRouter>
       <div className='app-container'>
-        <Header />
+        <Header image={logo} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<SignIn />} />
           <Route path='/profile' element={<Profile />} />
-          <Route path='*' element={<Error />} />
+          <Route path='*' element={<Error404 />} />
         </Routes>
         <Footer />
       </div>
