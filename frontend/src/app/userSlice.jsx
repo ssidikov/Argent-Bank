@@ -106,7 +106,7 @@ const userSlice = createSlice({
       })
       .addCase(updateUserName.fulfilled, (state, { payload }) => {
         if (state.user) {
-          state.user = { ...state.user, ...payload }
+          state.user.body = { ...state.user.body, ...payload.body }
         }
         state.loading = false
       })

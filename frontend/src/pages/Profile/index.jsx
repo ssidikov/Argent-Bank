@@ -45,9 +45,17 @@ export default function Profile() {
 
   const handleSaveName = () => {
     dispatch(
-      updateUserName({ token, profileData: { firstName: newFirstName, lastName: newLastName } })
+      updateUserName({ firstName: newFirstName, lastName: newLastName }) // Передаем только profileData
     )
-    setIsEditing(false)
+      .unwrap() // Получаем результат промиса из createAsyncThunk
+      .then(() => {
+        setFirstName(newFirstName) // Обновляем локальное состояние
+        setLastName(newLastName)
+        setIsEditing(false)
+      })
+      .catch((error) => {
+        console.error('Failed to update name:', error) // Обработка ошибок
+      })
   }
 
   if (!user) {
