@@ -1,11 +1,10 @@
-// index.jsx
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './Profile.sass'
 import Account from '../../components/Accaunt'
-import accounts from '../../data/accounts.json'
 import { fetchUserProfile, updateUserName } from '../../app/userSlice'
+import { getUserAccounts } from '../../api/api'
 
 export default function Profile() {
   const dispatch = useDispatch()
@@ -17,6 +16,9 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false)
   const [newFirstName, setNewFirstName] = useState('')
   const [newLastName, setNewLastName] = useState('')
+  const [accounts, setAccounts] = useState([])
+  const [loadingAccounts, setLoadingAccounts] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (!user) {
@@ -39,6 +41,16 @@ export default function Profile() {
     }
   }, [dispatch, token])
 
+  useEffect(() => {
+    if (user && token) {
+      setLoadingAccounts(true)
+      getUserAccounts(token, user.body.id)
+        .then((data) => setAccounts(data))
+        .catch((err) => setError(err))
+        .finally(() => setLoadingAccounts(false))
+    }
+  }, [user, token])
+
   const handleEditName = () => {
     setIsEditing(true)
   }
@@ -47,9 +59,9 @@ export default function Profile() {
     dispatch(
       updateUserName({ firstName: newFirstName, lastName: newLastName }) // Передаем только profileData
     )
-      .unwrap() // Получаем результат промиса из createAsyncThunk
+      .unwrap()
       .then(() => {
-        setFirstName(newFirstName) // Обновляем локальное состояние
+        setFirstName(newFirstName)
         setLastName(newLastName)
         setIsEditing(false)
       })
@@ -103,14 +115,17 @@ export default function Profile() {
         </div>
       )}
       <h2 className='sr-only'>Accounts</h2>
-      {accounts.map((account, index) => (
-        <Account
-          key={index}
-          title={account.title}
-          amount={account.amount}
-          description={account.description}
-        />
-      ))}
+      {loadingAccounts && <p>Loading accounts...</p>}
+      {error && <p>Error loading accounts: {error}</p>}
+      {!loadingAccounts &&
+        accounts.map((account, index) => (
+          <Account
+            key={index}
+            title={account.title}
+            amount={account.amount}
+            description={account.description}
+          />
+        ))}
     </main>
   )
 }

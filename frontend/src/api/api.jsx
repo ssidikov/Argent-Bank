@@ -41,3 +41,17 @@ export const updateUserNameAPI = async (token, profileData) => {
     throw error.response.data
   }
 }
+
+export const getUserAccounts = async (token, userId) => {
+  try {
+    const response = await axios.get(
+      'https://raw.githubusercontent.com/ssidikov/Argent-Bank/refs/heads/master/frontend/src/data/accounts.json'
+    )
+    const accountsData = response.data.find((user) => user.userId === userId)
+    if (!accountsData) throw new Error('Accounts not found for the given user ID')
+    return accountsData.accounts
+  } catch (error) {
+    console.error('Error fetching accounts:', error)
+    throw error.response?.data || error.message
+  }
+}
