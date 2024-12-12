@@ -1,0 +1,220 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation for phase 2
+  description: This API provides possible endpoints for managing financial transactions within the Argent Bank ecosystem.
+  version: '2.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v2
+schemes:
+  - http
+paths:
+  /account/{accountID}/transactions:
+    post:
+      tags:
+        - Transactions Module
+      summary: Retrieve account transactions
+      description: Fetches all transactions linked to the specified account ID. Use this to view transaction histories for budgeting or financial analysis.
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: accountID
+          description: Unique identifier of the account.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved all transactions for the account.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TransactionsResponse'
+        '401':
+          description: Unauthorized access. Ensure you are logged in with a valid token.
+        '404':
+          description: Account not found. Verify the provided account ID.
+        '500':
+          description: An internal server error occurred.
+  /transactions/{transactionID}/category:
+    put:
+      tags:
+        - Accounts and Transactions Module
+      summary: Update transaction category
+      description: Allows updating the category of a specific transaction. Useful for organizing transactions into meaningful categories for reporting.
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: Unique identifier of the transaction.
+          required: true
+          type: string
+        - in: body
+          name: category
+          description: New category for the transaction.
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionCategory'
+      responses:
+        '200':
+          description: Transaction category successfully updated.
+          schema:
+            $ref: '#/definitions/TransactionCategory'
+        '401':
+          description: Unauthorized access. Ensure you are logged in with a valid token.
+        '404':
+          description: Transaction not found. Verify the provided transaction ID.
+        '500':
+          description: An internal server error occurred.
+  /transactions/{transactionID}/note:
+    post:
+      tags:
+        - Accounts and Transactions Module
+      summary: Add a note to a transaction
+      description: Adds a custom note to a transaction for additional context or record-keeping.
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: Unique identifier of the transaction.
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: Note content to be added to the transaction.
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionNote'
+      responses:
+        '200':
+          description: Note successfully added to the transaction.
+          schema:
+            $ref: '#/definitions/TransactionResponseNote'
+        '401':
+          description: Unauthorized access. Ensure you are logged in with a valid token.
+        '404':
+          description: Transaction not found. Verify the provided transaction ID.
+        '500':
+          description: An internal server error occurred.
+  /transactions/{transactionID}/note/{noteID}:
+    put:
+      tags:
+        - Accounts and Transactions Module
+      summary: Modify a transaction note
+      description: Updates an existing note on a transaction, allowing for corrections or additional information.
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: Unique identifier of the transaction.
+          required: true
+          type: string
+        - in: path
+          name: noteID
+          description: Unique identifier of the note.
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: Updated note content.
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionNote'
+      responses:
+        '200':
+          description: Note successfully updated.
+          schema:
+            $ref: '#/definitions/TransactionResponseNote'
+        '401':
+          description: Unauthorized access. Ensure you are logged in with a valid token.
+        '404':
+          description: Note or transaction not found. Verify the provided IDs.
+        '500':
+          description: An internal server error occurred.
+    delete:
+      tags:
+        - Accounts and Transactions Module
+      summary: Delete a transaction note
+      description: Removes a note from a transaction, useful for correcting errors or clearing outdated information.
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionID
+          description: Unique identifier of the transaction.
+          required: true
+          type: string
+        - in: path
+          name: noteID
+          description: Unique identifier of the note.
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Note successfully deleted.
+        '401':
+          description: Unauthorized access. Ensure you are logged in with a valid token.
+        '404':
+          description: Note or transaction not found. Verify the provided IDs.
+        '500':
+          description: An internal server error occurred.
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  TransactionsResponse:
+    type: object
+    properties:
+      transactionID:
+        type: string
+        description: Unique identifier of the transaction.
+      transactionType:
+        type: string
+        description: Type of transaction, such as debit or credit.
+      date:
+        type: string
+        format: date-time
+        description: Date and time when the transaction occurred.
+      description:
+        type: string
+        description: Brief description of the transaction.
+      amount:
+        type: number
+        description: Transaction amount.
+        format: double
+      balance:
+        type: number
+        description: Account balance after the transaction.
+        format: double
+      category:
+        type: string
+        description: Category assigned to the transaction, e.g., "Groceries" or "Utilities."
+      note:
+        type: string
+        description: User-provided note for the transaction.
+  TransactionCategory:
+    type: object
+    properties:
+      category:
+        type: string
+        description: New category for the transaction. For example, "Food" or "Transport."
+  TransactionNote:
+    type: object
+    properties:
+      note:
+        type: string
+        description: Content of the note to be added or updated.
+  TransactionResponseNote:
+    type: object
+    properties:
+      note:
+        type: string
+        description: Updated note content.
+      noteID:
+        type: string
+        description: Unique identifier of the note.

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './Profile.sass'
-import Account from '../../components/Accaunt'
+import Account from '../../components/Account'
 import { fetchUserProfile, updateUserName } from '../../app/userSlice'
 import { getUserAccounts } from '../../api/api'
 
@@ -56,9 +56,7 @@ export default function Profile() {
   }
 
   const handleSaveName = () => {
-    dispatch(
-      updateUserName({ firstName: newFirstName, lastName: newLastName }) // Передаем только profileData
-    )
+    dispatch(updateUserName({ firstName: newFirstName, lastName: newLastName }))
       .unwrap()
       .then(() => {
         setFirstName(newFirstName)
@@ -66,7 +64,7 @@ export default function Profile() {
         setIsEditing(false)
       })
       .catch((error) => {
-        console.error('Failed to update name:', error) // Обработка ошибок
+        console.error('Failed to update name:', error)
       })
   }
 
