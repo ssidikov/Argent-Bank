@@ -11,6 +11,11 @@
         "title": "Argent Bank Savings (x6712)",
         "amount": "10,928.42",
         "description": "Available Balance"
+      },
+      {
+        "title": "Argent Bank Credit Card (x8349)",
+        "amount": "184.30",
+        "description": "Current Balance"
       }
     ]
   },
@@ -24,7 +29,7 @@
       },
       {
         "title": "Argent Bank Credit Card (x8349)",
-        "amount": "184.30",
+        "amount": "320.30",
         "description": "Current Balance"
       }
     ]

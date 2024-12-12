@@ -1,3 +1,4 @@
+// api.jsx
 import axios from 'axios'
 
 const api = axios.create({
@@ -47,9 +48,9 @@ export const getUserAccounts = async (token, userId) => {
     const response = await axios.get(
       'https://raw.githubusercontent.com/ssidikov/Argent-Bank/refs/heads/master/frontend/src/data/accounts.json'
     )
-    const accountsData = response.data.find((user) => user.userId === userId)
-    if (!accountsData) throw new Error('Accounts not found for the given user ID')
-    return accountsData.accounts
+    const accountsData = response.data.filter((user) => user.userId === userId)
+    if (accountsData.length === 0) throw new Error('Accounts not found for the given user ID')
+    return accountsData[0].accounts
   } catch (error) {
     console.error('Error fetching accounts:', error)
     throw error.response?.data || error.message
