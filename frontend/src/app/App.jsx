@@ -9,7 +9,11 @@ import logo from '../assets/logo.png'
 
 function App() {
   return (
-    <HashRouter>
+    <HashRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}>
       <div className='app-container'>
         <Header image={logo} />
         <Routes>
