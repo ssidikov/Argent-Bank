@@ -9,8 +9,12 @@ import { getUserAccounts } from '../../api/api'
 export default function Profile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  // Redux state
   const user = useSelector((state) => state.user.user)
   const token = useSelector((state) => state.user.token)
+
+  // Local states
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [isEditing, setIsEditing] = useState(false)
@@ -20,6 +24,7 @@ export default function Profile() {
   const [loadingAccounts, setLoadingAccounts] = useState(true)
   const [error, setError] = useState(null)
 
+  // Redirect to login if user is not authenticated
   useEffect(() => {
     if (!user) {
       navigate('/login')
@@ -35,12 +40,14 @@ export default function Profile() {
     }
   }, [user])
 
+  // Fetch user profile on token change
   useEffect(() => {
     if (token) {
       dispatch(fetchUserProfile(token))
     }
   }, [dispatch, token])
 
+  // Fetch user accounts
   useEffect(() => {
     if (user && token) {
       setLoadingAccounts(true)
@@ -55,6 +62,7 @@ export default function Profile() {
     setIsEditing(true)
   }
 
+  // Update user name
   const handleSaveName = () => {
     dispatch(updateUserName({ firstName: newFirstName, lastName: newLastName }))
       .unwrap()
@@ -68,6 +76,7 @@ export default function Profile() {
       })
   }
 
+  // Render nothing if user is not authenticated
   if (!user) {
     return null
   }
