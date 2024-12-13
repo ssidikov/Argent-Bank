@@ -12,7 +12,7 @@ paths:
   /account/{accountID}/transactions:
     post:
       tags:
-        - Transactions Module
+        - Accounts and Transactions Module
       summary: Retrieve account transactions
       description: Fetches all transactions linked to the specified account ID. Use this to view transaction histories for budgeting or financial analysis.
       security:
