@@ -1,14 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { loginUser, getUserInfo, updateUserNameAPI } from '../api/api'
 
-// Async actions
+/**
+ * Async action for logging in a user.
+ * Handles API calls and sets token in localStorage.
+ */
 export const login = createAsyncThunk(
   'user/login',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const {
-        body: { token, user },
-      } = await loginUser(email, password)
+      const response = await loginUser(email, password)
+      const { token, user } = response.body
       localStorage.setItem('token', token)
       return { user, token }
     } catch (error) {
@@ -17,13 +19,15 @@ export const login = createAsyncThunk(
   }
 )
 
+/**
+ * Async action for fetching user profile data.
+ * Retrieves user information based on the current token.
+ */
 export const fetchUserProfile = createAsyncThunk(
   'user/fetchProfile',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const {
-        user: { token },
-      } = getState()
+      const { token } = getState().user
       const userData = await getUserInfo(token)
       return userData
     } catch (error) {
@@ -32,13 +36,15 @@ export const fetchUserProfile = createAsyncThunk(
   }
 )
 
+/**
+ * Async action for updating the user's name.
+ * Sends a PUT request to update the user profile.
+ */
 export const updateUserName = createAsyncThunk(
   'user/updateName',
   async (profileData, { rejectWithValue, getState }) => {
     try {
-      const {
-        user: { token },
-      } = getState()
+      const { token } = getState().user
       const updatedData = await updateUserNameAPI(token, profileData)
       return updatedData
     } catch (error) {
@@ -47,7 +53,7 @@ export const updateUserName = createAsyncThunk(
   }
 )
 
-// Initial state
+// Initial state for user slice
 const initialState = {
   user: null,
   token: localStorage.getItem('token') || null,
@@ -55,11 +61,15 @@ const initialState = {
   error: null,
 }
 
-// User slice
+// Slice for user-related actions and reducers
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    /**
+     * Reducer for logging out a user.
+     * Clears user data and token from both state and localStorage.
+     */
     logout: (state) => {
       state.user = null
       state.token = null
@@ -117,6 +127,6 @@ const userSlice = createSlice({
   },
 })
 
-// Actions and reducer export
+// Export actions and reducer
 export const { logout } = userSlice.actions
 export default userSlice.reducer

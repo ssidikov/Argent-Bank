@@ -116,9 +116,9 @@ export default function Profile() {
       {loadingAccounts && <p>Loading accounts...</p>}
       {error && <p>Error loading accounts: {error}</p>}
       {!loadingAccounts &&
-        accounts.map((account, index) => (
+        accounts.map((account) => (
           <Account
-            key={index}
+            key={account.id}
             title={account.title}
             amount={account.amount}
             description={account.description}
