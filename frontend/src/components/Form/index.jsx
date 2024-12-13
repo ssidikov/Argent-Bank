@@ -52,7 +52,7 @@ export default function Form({ firstInput, secondInput, checkbox, onSubmit, onSu
           Remember me
         </label>
       </div>
-      <button className={`form__sign-in-button`} type='submit'>
+      <button className='form__sign-in-button' type='submit'>
         Sign in
       </button>
     </form>
