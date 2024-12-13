@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import SignIn from '../pages/SignIn'
 import Profile from '../pages/Profile'
@@ -9,11 +9,7 @@ import logo from '../assets/logo.png'
 
 function App() {
   return (
-    <HashRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}>
+    <BrowserRouter>
       <div className='app-container'>
         <Header image={logo} />
         <Routes>
@@ -24,7 +20,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
