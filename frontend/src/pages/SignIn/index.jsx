@@ -13,8 +13,12 @@ export default function SignIn() {
   const error = useSelector((state) => state.user.error)
   const user = useSelector((state) => state.user.user)
 
-  const handleSignIn = (username, password) => {
-    return dispatch(login({ email: username, password }))
+  const handleSignIn = async (username, password) => {
+    try {
+      await dispatch(login({ email: username, password })).unwrap()
+    } catch (err) {
+      console.error('Login error:', err)
+    }
   }
 
   const handleSuccess = () => {
@@ -40,7 +44,7 @@ export default function SignIn() {
           onSuccess={handleSuccess}
         />
         {loading && <p className='sign-in__loading'>Loading...</p>}
-        {error && <p className='sign-in__error'>Username/password incorrect</p>}
+        {error && <p className='sign-in__error'>{error}</p>}
       </section>
     </main>
   )

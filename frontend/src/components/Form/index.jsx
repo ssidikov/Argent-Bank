@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useState } from 'react'
 import './Form.sass'
 
-export default function Form({ firstInput, secondInput, checkbox, onSubmit, onSuccess }) {
+export default function Form({ firstInput, secondInput, checkbox, onSubmit, onSuccess, error }) {
   const [firstInputValue, setFirstInputValue] = useState('')
   const [secondInputValue, setSecondInputValue] = useState('')
   const [checkboxValue, setCheckboxValue] = useState(false)
@@ -58,6 +58,7 @@ export default function Form({ firstInput, secondInput, checkbox, onSubmit, onSu
       <button className='form__sign-in-button' type='submit'>
         Sign in
       </button>
+      {error && <p className='form__error'>{error}</p>}
     </form>
   )
 }
@@ -68,4 +69,5 @@ Form.propTypes = {
   checkbox: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onSuccess: PropTypes.func.isRequired,
+  error: PropTypes.string,
 }

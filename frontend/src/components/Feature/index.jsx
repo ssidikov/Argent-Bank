@@ -16,9 +16,3 @@ Feature.propTypes = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
 }
-
-Feature.defaultProps = {
-  picture: '',
-  title: 'Title',
-  text: 'Feature description.',
-}

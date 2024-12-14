@@ -11,11 +11,23 @@ const api = axios.create({
 // Function to log in a user
 export const loginUser = async (email, password) => {
   try {
-    // Send POST request for user login
+    // Send POST request for user login with email and password
     const response = await api.post('/user/login', { email, password })
     return response.data
   } catch (error) {
-    throw error.response.data
+    if (!error.response) {
+      // Network errors
+      throw new Error('Network error: Unable to connect to the server.')
+    }
+    // errors from the server
+    const status = error.response.status
+    if (status === 401) {
+      throw new Error('Invalid username or password.')
+    } else if (status === 500) {
+      throw new Error('Server error: Please try again later.')
+    } else {
+      throw new Error(error.response.data.message || 'An unexpected error occurred.')
+    }
   }
 }
 
