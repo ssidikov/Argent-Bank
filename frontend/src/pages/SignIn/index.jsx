@@ -1,5 +1,5 @@
 import UserIcon from '../../assets/user-icon.svg'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../../app/userSlice'

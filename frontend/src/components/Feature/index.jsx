@@ -1,4 +1,5 @@
 import './Feature.sass'
+import PropTypes from 'prop-types'
 
 export default function Feature({ picture, title, text }) {
   return (
@@ -8,4 +9,16 @@ export default function Feature({ picture, title, text }) {
       <p className='feature__text'>{text}</p>
     </div>
   )
+}
+
+Feature.propTypes = {
+  picture: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+}
+
+Feature.defaultProps = {
+  picture: '',
+  title: 'Title',
+  text: 'Feature description.',
 }

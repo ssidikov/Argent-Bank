@@ -1,4 +1,5 @@
 import './Account.sass'
+import PropTypes from 'prop-types'
 
 export default function Account({ title, amount, description }) {
   return (
@@ -13,4 +14,16 @@ export default function Account({ title, amount, description }) {
       </div>
     </section>
   )
+}
+
+Account.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+}
+
+Account.defaultProps = {
+  title: 'Account Title',
+  amount: 0,
+  description: 'No description provided',
 }
