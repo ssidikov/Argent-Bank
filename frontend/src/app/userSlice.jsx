@@ -21,7 +21,6 @@ export const login = createAsyncThunk(
 
 /**
  * Async action for fetching user profile data.
- * Retrieves user information based on the current token.
  */
 export const fetchUserProfile = createAsyncThunk(
   'user/fetchProfile',
@@ -116,7 +115,8 @@ const userSlice = createSlice({
       })
       .addCase(updateUserName.fulfilled, (state, { payload }) => {
         if (state.user) {
-          state.user.body = { ...state.user.body, ...payload.body }
+          // Only update changed fields
+          state.user = { ...state.user, ...payload }
         }
         state.loading = false
       })

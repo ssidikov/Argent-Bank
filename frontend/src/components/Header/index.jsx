@@ -1,3 +1,4 @@
+import React from 'react'
 import './Header.sass'
 import Logo from '../../assets/logo.png'
 import userIcon from '../../assets/user-icon.svg'
@@ -33,7 +34,7 @@ function Header() {
       </div>
       <nav className='header__nav'>
         {isAuthenticated ? (
-          <>
+          <React.Fragment>
             <NavLink to='/profile' className='header__nav-link'>
               <img src={userIcon} alt='User Icon' className='header__nav-link-icon' />
               <span className='header__nav-text'>{firstName}</span>
@@ -42,7 +43,7 @@ function Header() {
               <img src={signOutIcon} alt='Sign Out Icon' className='header__nav-link-icon' />
               <span className='header__nav-text'>Sign Out</span>
             </NavLink>
-          </>
+          </React.Fragment>
         ) : (
           <ul className='header__nav-list'>
             <li className='header__nav-item'>
