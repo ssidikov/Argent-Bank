@@ -22,6 +22,10 @@ The frontend is developed with the following technologies:
 - [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) - For type checking in React components.
 - [Vite](https://vitejs.dev/) - Fast development build tool.
 
+## Live Demo
+
+🌐 **Live Demo**: [https://ssidikov.github.io/Argent-Bank](https://ssidikov.github.io/Argent-Bank)
+
 ## Project Setup
 
 ### Prerequisites
@@ -93,5 +97,23 @@ src/
 ├── styles/          # Sass stylesheets
 ├── app/             # App, Redux slices and store setup
 ├── App.jsx          # Main application component
-├── main.jsx        # Entry point
 ```
+
+## Deployment
+
+### Automatic Deployment
+
+The project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+**Live Demo**: [https://ssidikov.github.io/Argent-Bank](https://ssidikov.github.io/Argent-Bank)
+
+### Manual Deployment
+
+To deploy manually:
+
+```bash
+npm run build    # Build the project
+npm run deploy   # Deploy to GitHub Pages
+```
+
+For detailed deployment instructions, see [DEPLOY.md](./DEPLOY.md).
