@@ -1,5 +1,25 @@
 # Деплой в GitHub Pages
 
+## Работа с ветками деплоя
+
+### Создание и переключение на ветку ver_2:
+
+```bash
+# Создать новую ветку ver_2 от текущей ветки
+git checkout -b ver_2
+
+# Или если ветка уже существует, переключиться на неё
+git checkout ver_2
+
+# Запушить ветку в удаленный репозиторий
+git push -u origin ver_2
+```
+
+### Настройка ветки по умолчанию в GitHub:
+
+1. Перейдите в **Settings** → **Branches**
+2. Выберите `ver_2` как default branch (опционально)
+
 ## Автоматический деплой (рекомендуется)
 
 ### Настройка GitHub репозитория:
@@ -14,10 +34,10 @@
    ```bash
    git add .
    git commit -m "feat: setup GitHub Pages deployment"
-   git push origin main
+   git push origin ver_2
    ```
 
-После пуша автоматически запустится GitHub Actions workflow, который:
+После пуша в ветку `ver_2` автоматически запустится GitHub Actions workflow, который:
 - Установит зависимости
 - Соберет проект
 - Задеплоит на GitHub Pages

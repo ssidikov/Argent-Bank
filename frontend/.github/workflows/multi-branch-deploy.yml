@@ -1,0 +1,83 @@
+name: Deploy Multiple Branches
+
+on:
+  push:
+    branches: [main, master, ver_2, develop]
+  workflow_dispatch: # Позволяет запускать вручную
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    # Деплоим только если это нужная ветка
+    if: contains(fromJson('["main", "master", "ver_2"]'), github.ref_name)
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build
+        run: |
+          cd frontend
+          npm run build
+        env:
+          # Можно добавить разные настройки для разных веток
+          VITE_APP_VERSION: ${{ github.ref_name }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Дополнительная джоба для других веток (без деплоя)
+  build-only:
+    runs-on: ubuntu-latest
+    
+    # Запускается для всех остальных веток
+    if: ${{ !contains(fromJson('["main", "master", "ver_2"]'), github.ref_name) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build and Test
+        run: |
+          cd frontend
+          npm run build
+          npm run lint

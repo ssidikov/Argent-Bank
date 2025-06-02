@@ -116,4 +116,23 @@ npm run build    # Build the project
 npm run deploy   # Deploy to GitHub Pages
 ```
 
+### Branch Management
+
+The project uses `ver_2` branch for deployment. To work with branches:
+
+```bash
+# Switch to deployment branch
+git checkout ver_2
+
+# Create and switch to new branch
+git checkout -b new-feature-branch
+
+# Push to deployment branch
+git push origin ver_2
+```
+
+#### Quick Branch Management Scripts:
+- **Windows**: Run `branch-manager.bat`
+- **PowerShell**: Run `.\branch-manager.ps1`
+
 For detailed deployment instructions, see [DEPLOY.md](./DEPLOY.md).
