@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
 import SignIn from '../pages/SignIn'
 import Profile from '../pages/Profile'
@@ -9,7 +9,7 @@ import logo from '../assets/logo.png'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='app-container'>
         <Header image={logo} />
         <Routes>
@@ -20,7 +20,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
