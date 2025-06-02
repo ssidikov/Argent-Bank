@@ -3,68 +3,341 @@
 
 .home
   &__features
-    @include flex-container
-    flex-direction: column
-    padding: 2rem
-
-    @include tablet-version
-      flex-direction: row
-
-  .feature
-    &__icon
-      width: 100px
-      border: 10px solid $primary-color
-      border-radius: 50%
-      padding: 1rem
-
-    &__item
-      flex: 1
-      padding: 2.5rem
-
-    &__title
-      color: $text-color
-      font-size: 1.25rem
-      font-weight: bold
-      margin: 20px 0 8px
-
-.hero
-  background-image: url('../../assets/bank-tree.jpeg')
-  background-position: 0 -50px
-  background-size: cover
-  background-repeat: no-repeat
-  height: 300px
-  position: relative
-
-  @include tablet-version
-    height: 400px
-    background-position: 0% 33%
-
-  &__content
+    background: $background-color
+    padding: $spacing-2xl 0
     position: relative
-    top: 2rem
-    width: 200px
-    background: $white
-    padding: 2rem
-    text-align: left
-    margin: 0 auto
 
     @include tablet-version
+      padding: $spacing-3xl 0
+
+    &::before
+      content: ''
       position: absolute
-      top: 50px
-      right: 50px
-      width: 300px
-      margin: 2rem
+      top: 0
+      left: 0
+      right: 0
+      height: 100px
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, transparent 100%)
+
+    &-container
+      // max-width: fit-content
+      margin: 0 auto
+      padding: 0 $spacing-md
+
+      @include tablet-version
+        padding: 0 $spacing-lg
+
+    &-header
+      text-align: center
+      margin-bottom: $spacing-xl
+
+      @include tablet-version
+        margin-bottom: $spacing-3xl
+
+    &-badge
+      display: inline-flex
+      align-items: center
+      background: rgba(0, 212, 170, 0.1)
+      color: $primary-color
+      border: 1px solid rgba(0, 212, 170, 0.2)
+      border-radius: $radius-full
+      padding: $spacing-xs $spacing-md
+      font-size: 0.875rem
+      font-weight: $font-semibold
+      text-transform: uppercase
+      letter-spacing: 0.5px
+      margin-bottom: $spacing-md
+
+      @include tablet-version
+        margin-bottom: $spacing-lg
+
+    &-title
+      font-family: $font-family-headings
+      font-size: clamp(1.75rem, 5vw, 3rem)
+      font-weight: $font-extrabold
+      color: $text-dark
+      margin-bottom: $spacing-md
+      line-height: 1.2
+
+      @include tablet-version
+        margin-bottom: $spacing-lg
+
+      &--accent
+        background: $primary-gradient
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
+        background-clip: text
 
     &-subtitle
-      font-weight: bold
+      font-size: clamp(1rem, 2.5vw, 1.125rem)
+      color: $text-light
+      line-height: 1.6
+      max-width: 100%
+      margin: 0 auto
+
+      @include tablet-version
+        max-width: 600px
+
+    &-grid
+      display: grid
+      grid-template-columns: 1fr
+      gap: $spacing-lg
+
+      @media (min-width: 600px)
+        grid-template-columns: repeat(2, 1fr)
+        gap: $spacing-lg
+
+      @include tablet-version
+        grid-template-columns: repeat(3, 1fr)
+        gap: $spacing-xl
+
+      @media (min-width: 1200px)
+        gap: $spacing-2xl
+
+  &__stats
+    background: $white
+    padding: $spacing-2xl 0
+    border-top: 1px solid $gray-200
+    border-bottom: 1px solid $gray-200
+
+    @include tablet-version
+      padding: $spacing-3xl 0
+
+    &-container
+      // max-width: 1200px
+      margin: 0 auto
+      padding: 0 $spacing-md
+
+      @include tablet-version
+        padding: 0 $spacing-lg
+
+    &-grid
+      display: grid
+      grid-template-columns: repeat(2, 1fr)
+      gap: $spacing-md
+
+      @media (min-width: 600px)
+        gap: $spacing-lg
+
+      @include tablet-version
+        grid-template-columns: repeat(4, 1fr)
+        gap: $spacing-xl
+
+  &__stat
+    text-align: center
+    padding: $spacing-md
+    border-radius: $radius-lg
+    background: $gray-50
+    transition: all $transition-duration $transition-smooth
+
+    @include tablet-version
+      padding: $spacing-lg
+
+    &:hover
+      transform: translateY(-4px)
+      background: $white
+      box-shadow: $card-shadow
+
+    &-number
+      font-size: clamp(1.5rem, 4vw, 2.5rem)
+      font-weight: $font-extrabold
+      color: $primary-color
+      margin-bottom: $spacing-xs
+      font-family: $font-family-headings
+
+      @include tablet-version
+        margin-bottom: $spacing-sm
+
+    &-label
+      font-size: clamp(0.75rem, 2vw, 0.875rem)
+      color: $text-light
+      font-weight: $font-medium
+      text-transform: uppercase
+      letter-spacing: 0.5px
+      line-height: 1.4
+
+  &__cta
+    background: linear-gradient(135deg, $background-dark 0%, $gray-800 100%)
+    padding: $spacing-2xl 0
+    position: relative
+    overflow: hidden
+
+    @include tablet-version
+      padding: $spacing-3xl 0
+
+    &::before
+      content: ''
+      position: absolute
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>')
+      opacity: 0.5
+
+    &-container
+      max-width: 1200px
+      margin: 0 auto
+      padding: 0 $spacing-md
+      display: grid
+      grid-template-columns: 1fr
+      align-items: center
+      gap: $spacing-xl
+      position: relative
+      z-index: 1
+
+      @include tablet-version
+        grid-template-columns: 2fr 1fr
+        gap: $spacing-2xl
+        padding: 0 $spacing-lg
+
+    &-content
+      text-align: center
+
+      @include tablet-version
+        text-align: left
+
+    &-title
+      font-family: $font-family-headings
+      font-size: clamp(1.75rem, 5vw, 3rem)
+      font-weight: $font-extrabold
+      color: $white
+      margin-bottom: $spacing-md
+      line-height: 1.2
+
+      @include tablet-version
+        margin-bottom: $spacing-lg
+
+    &-subtitle
+      font-size: clamp(1rem, 2.5vw, 1.125rem)
+      color: rgba(255, 255, 255, 0.8)
+      line-height: 1.6
+      margin-bottom: $spacing-lg
+      max-width: 100%
+
+      @include tablet-version
+        margin-bottom: $spacing-xl
+        max-width: 500px
+
+    &-actions
+      display: flex
+      flex-direction: column
+      gap: $spacing-md
+      align-items: center
+
+      @media (min-width: 480px)
+        flex-direction: row
+        justify-content: center
+
+      @include tablet-version
+        justify-content: flex-start
+
+    &-primary
+      background: $primary-gradient
+      color: $white
+      border: none
+      border-radius: $radius-md
+      padding: $spacing-md $spacing-lg
       font-size: 1rem
+      font-weight: $font-semibold
+      font-family: $font-family
+      cursor: pointer
+      display: flex
+      align-items: center
+      gap: $spacing-sm
+      box-shadow: $button-shadow
+      transition: all $transition-duration $transition-smooth
+      min-width: 180px
+      justify-content: center
+
+      @media (min-width: 480px)
+        font-size: 1.125rem
+        padding: $spacing-md $spacing-xl
+        min-width: 200px
+
+      &:hover
+        transform: translateY(-2px)
+        box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4)
+
+      .home__cta-icon
+        transition: transform $transition-duration $transition-bounce
+
+      &:hover .home__cta-icon
+        transform: scale(1.2) rotate(10deg)
+
+    &-secondary
+      background: transparent
+      color: $white
+      border: 2px solid rgba(255, 255, 255, 0.3)
+      border-radius: $radius-md
+      padding: $spacing-md $spacing-lg
+      font-size: 1rem
+      font-weight: $font-semibold
+      font-family: $font-family
+      cursor: pointer
+      transition: all $transition-duration $transition-smooth
+      min-width: 180px
+
+      @media (min-width: 480px)
+        font-size: 1.125rem
+        padding: $spacing-md $spacing-xl
+        min-width: 200px
+
+      &:hover
+        background: rgba(255, 255, 255, 0.1)
+        border-color: rgba(255, 255, 255, 0.5)
+
+    &-visual
+      display: flex
+      justify-content: center
+      align-items: center
+      order: -1
 
       @include tablet-version
-        font-size: 1.5rem
+        order: 0
 
-    &-text
-      margin-bottom: 0
-      font-size: 0.9rem
+    &-badge
+      background: rgba(0, 212, 170, 0.1)
+      backdrop-filter: blur(20px)
+      border: 2px solid $primary-color
+      border-radius: $radius-xl
+      padding: $spacing-lg
+      text-align: center
+      position: relative
+      overflow: hidden
+      width: 200px
+      height: 200px
+      display: flex
+      align-items: center
+      justify-content: center
 
-      @include tablet-version
-        font-size: 1.2rem
+      @media (min-width: 480px)
+        width: 250px
+        height: 250px
+        padding: $spacing-xl
+
+      &::before
+        content: ''
+        position: absolute
+        top: -50%
+        left: -50%
+        width: 200%
+        height: 200%
+        background: conic-gradient(transparent, rgba(0, 212, 170, 0.3), transparent 30%)
+        animation: rotate 3s linear infinite
+
+      &-text
+        font-size: 1rem
+        font-weight: $font-bold
+        color: $primary-color
+        position: relative
+        z-index: 1
+
+        @media (min-width: 480px)
+          font-size: 1.25rem
+
+@keyframes rotate
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)

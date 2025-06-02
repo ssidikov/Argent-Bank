@@ -1,37 +1,350 @@
+@use '../../styles/variables' as *
+@use '../../styles/mixins' as *
+
+.form-container
+  width: 100%
+  max-width: 400px
+  margin: 0 auto
+
 .form
-  &__input-wrapper
+  display: flex
+  flex-direction: column
+  gap: $spacing-lg
+  width: 100%
+
+  &__error-banner
+    display: flex
+    align-items: center
+    gap: $spacing-sm
+    background: rgba(239, 68, 68, 0.1)
+    border: 1px solid rgba(239, 68, 68, 0.2)
+    border-radius: $radius-lg
+    padding: $spacing-md
+    margin-bottom: $spacing-lg
+    animation: slideInDown 0.3s ease-out
+
+  &__error-icon
+    font-size: 1.125rem
+    flex-shrink: 0
+
+  &__error-text
+    color: #dc2626
+    font-size: 0.875rem
+    font-weight: $font-medium
+
+  &__group
     display: flex
     flex-direction: column
-    text-align: left
-    margin-bottom: 1rem
+    gap: $spacing-xs
 
   &__label
-    font-weight: bold
+    font-weight: $font-semibold
+    color: $text-dark
+    font-size: 0.875rem
+    margin-bottom: $spacing-xs
+    transition: color $transition-duration $transition-smooth
 
-  &__input
-    padding: 0.5rem
-    border: 1px solid #ccc
-    border-radius: 4px
-    margin-top: 0.5rem
-    font-size: 1.2rem
-
-  &__input-remember
+  &__input-wrapper
+    position: relative
     display: flex
     align-items: center
 
-  &__checkbox
-    margin-right: 0.25rem
+  &__input-icon
+    position: absolute
+    left: $spacing-md
+    font-size: 1rem
+    color: $text-light
+    z-index: 2
+    transition: color $transition-duration $transition-smooth
 
-  &__checkbox-label
-    margin-left: 0.25rem
-
-  &__sign-in-button
+  &__input
     width: 100%
-    padding: 8px
-    font-size: 1.1rem
-    font-weight: bold
-    margin-top: 1rem
+    padding: $spacing-md $spacing-md $spacing-md calc(#{$spacing-md} * 2.75)
+    border: 2px solid $gray-300
+    border-radius: $radius-lg
+    font-size: 1rem
+    background: $white
+    color: $text-dark
+    transition: all $transition-duration $transition-smooth
+    font-family: inherit
+
+    &::placeholder
+      color: $gray-400
+      transition: opacity $transition-duration $transition-smooth
+
+    &:focus
+      outline: none
+      border-color: $primary-color
+      box-shadow: 0 0 0 4px rgba(0, 212, 170, 0.1)
+      transform: translateY(-1px)
+
+      &::placeholder
+        opacity: 0.7
+
+    &--error
+      border-color: #dc2626
+      box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1)
+
+      &:focus
+        border-color: #dc2626
+        box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1)
+
+    &--filled
+      border-color: $primary-color
+
+  &__toggle-password
+    position: absolute
+    right: $spacing-md
+    background: none
     border: none
-    background-color: #00bc77
-    color: #fff
+    color: $text-light
+    font-size: 1rem
     cursor: pointer
+    padding: $spacing-xs
+    border-radius: $radius-sm
+    transition: all $transition-duration $transition-smooth
+    z-index: 2
+
+    &:hover
+      color: $text-dark
+      background: rgba(0, 0, 0, 0.05)
+
+    &:focus
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+
+  &__field-error
+    color: #dc2626
+    font-size: 0.75rem
+    font-weight: $font-medium
+    margin-top: $spacing-xs
+    display: flex
+    align-items: center
+    gap: $spacing-xs
+    animation: slideInUp 0.2s ease-out
+
+    &::before
+      content: '⚠️'
+      font-size: 0.875rem
+
+  &__options
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin: $spacing-sm 0
+
+    @media (max-width: #{$breakpoint-s - 1px})
+      flex-direction: column
+      gap: $spacing-md
+      align-items: flex-start
+
+  &__checkbox
+    display: flex
+    align-items: center
+    gap: $spacing-sm
+    cursor: pointer
+    user-select: none
+    transition: all $transition-duration $transition-smooth
+
+    &:hover
+      .form__checkbox-mark
+        border-color: $primary-color
+        transform: scale(1.05)
+
+  &__checkbox-input
+    position: absolute
+    opacity: 0
+    cursor: pointer
+
+  &__checkbox-mark
+    width: 20px
+    height: 20px
+    border: 2px solid $gray-300
+    border-radius: $radius-sm
+    position: relative
+    transition: all $transition-duration $transition-smooth
+    display: flex
+    align-items: center
+    justify-content: center
+    background: $white
+
+    &::after
+      content: '✓'
+      color: $white
+      font-size: 0.75rem
+      font-weight: $font-bold
+      opacity: 0
+      transform: scale(0) rotate(45deg)
+      transition: all $transition-duration $transition-bounce
+
+  &__checkbox-input:checked + &__checkbox-mark
+    background: $primary-gradient
+    border-color: $primary-color
+    transform: scale(1)
+
+    &::after
+      opacity: 1
+      transform: scale(1) rotate(0deg)
+
+  &__checkbox-input:focus + &__checkbox-mark
+    outline: 2px solid $primary-color
+    outline-offset: 2px
+
+  &__checkbox-text
+    color: $text-dark
+    font-size: 0.875rem
+    font-weight: $font-medium
+
+  &__forgot-link
+    color: $primary-color
+    font-size: 0.875rem
+    font-weight: $font-medium
+    text-decoration: none
+    transition: all $transition-duration $transition-smooth
+    border-radius: $radius-sm
+    padding: $spacing-xs
+
+    &:hover
+      color: $primary-dark
+      background: rgba(0, 212, 170, 0.1)
+
+    &:focus
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+
+  &__submit
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: $spacing-sm
+    background: $primary-gradient
+    color: $white
+    border: none
+    border-radius: $radius-lg
+    padding: $spacing-lg
+    font-size: 1rem
+    font-weight: $font-semibold
+    cursor: pointer
+    transition: all $transition-duration $transition-smooth
+    position: relative
+    overflow: hidden
+    margin-top: $spacing-md
+
+    &::before
+      content: ''
+      position: absolute
+      top: 0
+      left: -100%
+      width: 100%
+      height: 100%
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)
+      transition: left 0.5s
+
+    &:hover:not(:disabled)
+      transform: translateY(-2px)
+      box-shadow: 0 12px 24px rgba(0, 212, 170, 0.3)
+
+      &::before
+        left: 100%
+
+      .form__submit-icon
+        transform: translateX(4px)
+
+    &:active:not(:disabled)
+      transform: translateY(0)
+
+    &:focus
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+
+    &:disabled
+      background: $gray-400
+      cursor: not-allowed
+      transform: none
+      opacity: 0.7
+
+      &:hover
+        transform: none
+        box-shadow: none
+
+    &--loading
+      cursor: not-allowed
+
+      .form__submit-icon
+        display: none
+
+  &__submit-icon
+    font-size: 1.125rem
+    transition: transform $transition-duration $transition-smooth
+
+  &__loading-spinner
+    width: 20px
+    height: 20px
+    border: 2px solid rgba(255, 255, 255, 0.3)
+    border-top: 2px solid $white
+    border-radius: 50%
+    animation: spin 1s linear infinite
+
+// Enhanced animations
+@keyframes slideInDown
+  from
+    opacity: 0
+    transform: translateY(-10px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes slideInUp
+  from
+    opacity: 0
+    transform: translateY(5px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+// Focus improvements for accessibility
+.form__input:focus + .form__input-icon,
+.form__input--filled + .form__input-icon
+  color: $primary-color
+
+// Mobile optimizations
+@media (max-width: #{$breakpoint-s - 1px})
+  .form
+    gap: $spacing-md
+
+    &__group
+      gap: $spacing-xs
+
+    &__input
+      font-size: 16px // Prevent zoom on iOS
+
+    &__submit
+      padding: $spacing-lg $spacing-md
+      font-size: 1rem
+
+    &__options
+      flex-direction: column
+      align-items: stretch
+      gap: $spacing-md
+
+    &__forgot-link
+      text-align: center
+
+// High contrast mode support
+@media (prefers-contrast: high)
+  .form
+    &__input
+      border-width: 3px
+
+    &__checkbox-mark
+      border-width: 3px
+
+    &__submit
+      border: 2px solid $white

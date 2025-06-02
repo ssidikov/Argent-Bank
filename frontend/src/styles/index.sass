@@ -1,9 +1,21 @@
 @use './variables' as *
 @use './mixins' as *
 
+// Import Inter font
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap')
+
 *
   margin: 0
   padding: 0
+  box-sizing: border-box
+
+*::before,
+*::after
+  box-sizing: border-box
+
+// Smooth scrolling
+html
+  scroll-behavior: smooth
 
 .app-container
   display: flex
@@ -16,24 +28,47 @@ main
   flex-direction: column
 
 body
-  line-height: 1.2
+  line-height: 1.6
   font-family: $font-family
+  font-weight: $font-normal
   color: $text-color
+  background-color: $background-color
   -webkit-font-smoothing: antialiased
-  text-align: center
+  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeSpeed
+  overflow-x: hidden
+
+  // Mobile-first responsive padding
+    // padding: 0 $spacing-sm
+
+  @include tablet-version
+    padding: 0
 
   header, footer
-    padding-left: 20px
-    padding-right: 20px
+    padding-left: 0
+    padding-right: 0
     box-sizing: border-box
 
+    @include tablet-version
+      padding-left: $spacing-lg
+      padding-right: $spacing-lg
+
   h1, h2, h3, h4, h5, h6
-    font-family: $font-family
-    font-weight: 700
-    color: $text-color
+    font-family: $font-family-headings
+    font-weight: $font-bold
+    color: $text-dark
+    line-height: 1.2
+    margin: 0
+
+  p
+    margin: 0
+    line-height: 1.6
 
   img
     object-fit: cover
+    max-width: 100%
+    height: auto
+    display: block
 
   header, main
     margin: 0 auto
@@ -41,7 +76,50 @@ body
 
   button
     cursor: pointer
+    border: none
+    outline: none
+    transition: all $transition-duration $transition-smooth
+    font-family: inherit
 
+    &:focus-visible
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+
+    &:disabled
+      opacity: 0.6
+      cursor: not-allowed
+      transform: none !important
+
+  a
+    color: $primary-color
+    text-decoration: none
+    transition: color $transition-duration $transition-smooth
+
+    &:hover
+      color: $primary-dark
+
+    &:focus-visible
+      outline: 2px solid $primary-color
+      outline-offset: 2px
+      border-radius: $radius-sm
+
+  input, textarea, select
+    font-family: inherit
+    border-radius: $radius-sm
+    border: 1px solid $gray-300
+    transition: all $transition-duration $transition-smooth
+    padding: $spacing-sm
+    font-size: 1rem
+
+    &:focus
+      outline: none
+      border-color: $primary-color
+      box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1)
+
+    &::placeholder
+      color: $gray-400
+
+// Screen reader only content
 .sr-only
   border: 0
   clip: rect(1px, 1px, 1px, 1px)
@@ -54,3 +132,100 @@ body
   position: absolute
   width: 1px
   white-space: nowrap
+
+// Utility classes for responsive design
+.container
+  max-width: 1200px
+  margin: 0 auto
+  padding: 0 $spacing-md
+
+  @include tablet-version
+    padding: 0 $spacing-lg
+
+.text-center
+  text-align: center
+
+.text-left
+  text-align: left
+
+.text-right
+  text-align: right
+
+// Hide on mobile
+.hide-mobile
+  @include mobile-version
+    display: none !important
+
+// Hide on tablet and above
+.hide-tablet
+  @include tablet-version
+    display: none !important
+
+// Show only on mobile
+.show-mobile
+  display: block
+
+  @include tablet-version
+    display: none !important
+
+// Show only on tablet and above
+.show-tablet
+  display: none
+
+  @include tablet-version
+    display: block !important
+
+// Responsive spacing utilities
+.mt-responsive
+  margin-top: $spacing-md
+
+  @include tablet-version
+    margin-top: $spacing-lg
+
+.mb-responsive
+  margin-bottom: $spacing-md
+
+  @include tablet-version
+    margin-bottom: $spacing-lg
+
+.p-responsive
+  padding: $spacing-md
+
+  @include tablet-version
+    padding: $spacing-lg
+
+// Animation utilities
+.fade-in
+  animation: fadeIn 0.6s ease-out
+
+.slide-up
+  animation: slideUp 0.6s ease-out
+
+@keyframes fadeIn
+  from
+    opacity: 0
+  to
+    opacity: 1
+
+@keyframes slideUp
+  from
+    opacity: 0
+    transform: translateY(20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+// Focus management for accessibility
+.focus-visible
+  &:focus-visible
+    outline: 2px solid $primary-color
+    outline-offset: 2px
+    border-radius: $radius-sm
+
+// Reduced motion preference
+@media (prefers-reduced-motion: reduce)
+  *
+    animation-duration: 0.01ms !important
+    animation-iteration-count: 1 !important
+    transition-duration: 0.01ms !important
+    scroll-behavior: auto !important

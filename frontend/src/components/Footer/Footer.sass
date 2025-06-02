@@ -2,9 +2,119 @@
 @use '../../styles/mixins.sass' as *
 
 .footer
-  display: flex
-  justify-content: center
-  border-top: 2px solid #ccc
-  padding: 2rem 0 1.5rem
-  &-text
-    font-weight: 500
+  background: $background-dark
+  color: $white
+  padding: $spacing-3xl 0 $spacing-lg
+  margin-top: auto
+
+  &__container
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 $spacing-lg
+
+  &__content
+    display: grid
+    grid-template-columns: 1fr
+    gap: $spacing-2xl
+    margin-bottom: $spacing-2xl
+
+    @include tablet-version
+      grid-template-columns: 1fr 2fr
+      gap: $spacing-3xl
+
+  &__brand
+    &-name
+      font-family: $font-family-headings
+      font-size: 1.75rem
+      font-weight: $font-extrabold
+      color: $primary-color
+      margin-bottom: $spacing-sm
+
+    &-tagline
+      color: $gray-400
+      font-size: 1rem
+      font-weight: $font-normal
+
+  &__links
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+    gap: $spacing-xl
+
+    @include tablet-version
+      grid-template-columns: repeat(3, 1fr)
+
+  &__link-group
+    &:not(:last-child)
+      margin-bottom: $spacing-lg
+
+  &__link-title
+    font-size: 1rem
+    font-weight: $font-semibold
+    color: $white
+    margin-bottom: $spacing-md
+    text-transform: uppercase
+    letter-spacing: 0.5px
+
+  &__link-list
+    list-style: none
+    padding: 0
+    margin: 0
+
+    li
+      margin-bottom: $spacing-sm
+
+  &__link
+    color: $gray-400
+    text-decoration: none
+    font-size: 0.875rem
+    font-weight: $font-normal
+    transition: color $transition-duration $transition-smooth
+
+    &:hover
+      color: $primary-color
+
+  &__bottom
+    display: flex
+    flex-direction: column
+    align-items: center
+    gap: $spacing-md
+    padding-top: $spacing-lg
+    border-top: 1px solid $gray-700
+
+    @include tablet-version
+      flex-direction: row
+      justify-content: space-between
+
+  &__copyright
+    color: $gray-400
+    font-size: 0.875rem
+    font-weight: $font-normal
+    text-align: center
+
+    @include tablet-version
+      text-align: left
+
+  &__social
+    display: flex
+    gap: $spacing-md
+
+    &-link
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 40px
+      height: 40px
+      background: rgba(255, 255, 255, 0.1)
+      border-radius: $radius-full
+      color: $gray-400
+      text-decoration: none
+      transition: all $transition-duration $transition-smooth
+      backdrop-filter: blur(10px)
+
+      &:hover
+        background: $primary-color
+        color: $white
+        transform: translateY(-2px)
+
+      span
+        font-size: 1.25rem

@@ -1,4 +1,3 @@
-import React from 'react'
 import './Header.sass'
 import Logo from '../../assets/logo.png'
 import userIcon from '../../assets/user-icon.svg'
@@ -13,9 +12,15 @@ function Header() {
   const user = useSelector((state) => state.user.user)
   const isAuthenticated = Boolean(useSelector((state) => state.user.token))
   const [firstName, setFirstName] = useState('')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleSignOut = () => {
     dispatch(logout())
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   useEffect(() => {
@@ -26,35 +31,55 @@ function Header() {
 
   return (
     <header className='header'>
-      <div className='header__logo'>
-        <NavLink to='/' className='header__logo-link'>
-          <img src={Logo} alt='Argent Bank' className='header__logo-img' />
-          <h1 className='sr-only'>Argent Bank</h1>
-        </NavLink>
-      </div>
-      <nav className='header__nav'>
-        {isAuthenticated ? (
-          <React.Fragment>
-            <NavLink to='/profile' className='header__nav-link'>
-              <img src={userIcon} alt='User Icon' className='header__nav-link-icon' />
-              <span className='header__nav-text'>{firstName}</span>
-            </NavLink>
-            <NavLink to='/' onClick={handleSignOut} className='header__nav-link'>
-              <img src={signOutIcon} alt='Sign Out Icon' className='header__nav-link-icon' />
-              <span className='header__nav-text'>Sign Out</span>
-            </NavLink>
-          </React.Fragment>
-        ) : (
-          <ul className='header__nav-list'>
-            <li className='header__nav-item'>
-              <NavLink to='/login' className='header__nav-link'>
-                <img src={userIcon} alt='Sign In Icon' className='header__nav-link-icon' />
-                <p className='header__nav-text'>Sign In</p>
+      <div className='header__container'>
+        <div className='header__logo'>
+          <NavLink to='/' className='header__logo-link'>
+            <img src={Logo} alt='Argent Bank' className='header__logo-img' />
+          </NavLink>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className={`header__mobile-toggle ${
+            isMobileMenuOpen ? 'header__mobile-toggle--active' : ''
+          }`}
+          onClick={toggleMobileMenu}
+          aria-label='Toggle navigation menu'>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav className={`header__nav ${isMobileMenuOpen ? 'header__nav--mobile-open' : ''}`}>
+          {isAuthenticated ? (
+            <div className='header__nav-authenticated'>
+              <NavLink
+                to='/profile'
+                className='header__nav-item header__nav-item--profile'
+                onClick={() => setIsMobileMenuOpen(false)}>
+                <div className='header__avatar'>
+                  <img src={userIcon} alt='User Avatar' className='header__avatar-img' />
+                </div>
+                <span className='header__nav-text'>Hello, {firstName}</span>
               </NavLink>
-            </li>
-          </ul>
-        )}
-      </nav>
+              <button onClick={handleSignOut} className='header__nav-item header__nav-item--button'>
+                <img src={signOutIcon} alt='Sign Out' className='header__nav-icon' />
+                <span className='header__nav-text'>Sign Out</span>
+              </button>
+            </div>
+          ) : (
+            <div className='header__nav-guest'>
+              <NavLink
+                to='/login'
+                className='header__nav-item header__nav-item--signin'
+                onClick={() => setIsMobileMenuOpen(false)}>
+                <img src={userIcon} alt='Sign In' className='header__nav-icon' />
+                <span className='header__nav-text'>Sign In</span>
+              </NavLink>
+            </div>
+          )}
+        </nav>
+      </div>
     </header>
   )
 }

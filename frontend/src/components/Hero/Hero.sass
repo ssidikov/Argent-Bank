@@ -2,39 +2,233 @@
 @use '../../styles/variables.sass' as *
 
 .hero
-  background-image: url(../../assets/bank-tree.jpeg)
-  background-position: 0 -50px
-  background-size: cover
-  background-repeat: no-repeat
-  height: 300px
   position: relative
-  @include tablet-version
-    height: 400px
-    background-position: 0% 33%
-  &__content
+  min-height: 100vh
+  background: $hero-gradient, url(../../assets/bank-tree.jpeg)
+  background-size: cover
+  background-position: center
+  background-attachment: fixed
+  display: flex
+  align-items: center
+  overflow: hidden
+
+  @media (max-width: #{$breakpoint-s - 1px})
+    min-height: 100vh
+    background-attachment: scroll
+
+  @media (max-width: #{$breakpoint-m - 1px})
+    min-height: 90vh
+
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.7) 50%, rgba(0, 212, 170, 0.1) 100%)
+    z-index: 1
+
+  &__container
     position: relative
-    top: 2rem
-    width: 200px
-    background: white
-    padding: 2rem
-    text-align: left
+    z-index: 2
+    max-width: 1400px
     margin: 0 auto
-    box-sizing: content-box
-    @include tablet-version
-      position: absolute
-      top: 50px
-      right: 50px
-      width: 300px
-      margin: 2rem
+    padding: $spacing-xl $spacing-lg
+    width: 100%
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: $spacing-3xl
+    align-items: center
+
+    @media (max-width: #{$breakpoint-m - 1px})
+      grid-template-columns: 1fr
+      gap: $spacing-xl
+      text-align: center
+
+    @media (max-width: #{$breakpoint-s - 1px})
+      padding: $spacing-2xl $spacing-md
+
+  &__left
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+
+    @media (max-width: #{$breakpoint-m - 1px})
+      align-items: center
+
+  &__badge
+    background: rgba(255, 255, 255, 0.1)
+    border: 1px solid rgba(255, 255, 255, 0.2)
+    border-radius: $radius-full
+    padding: $spacing-xs $spacing-md
+    margin-bottom: $spacing-lg
+    backdrop-filter: blur(10px)
+
+    span
+      color: $white
+      font-size: 0.875rem
+      font-weight: $font-medium
+
+  &__title
+    font-size: clamp(2.5rem, 5vw, 4rem)
+    font-weight: $font-extrabold
+    color: $white
+    line-height: 1.1
+    margin: 0 0 $spacing-lg
+    text-shadow: $text-shadow
+
+    @media (max-width: #{$breakpoint-s - 1px})
+      font-size: 2.5rem
+
+  &__title--gradient
+    background: $primary-gradient
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    background-clip: text
+
   &__subtitle
+    font-size: clamp(1.125rem, 2vw, 1.25rem)
+    color: $gray-200
+    line-height: 1.6
+    margin: 0 0 $spacing-xl
+    max-width: 500px
+
+    @media (max-width: #{$breakpoint-m - 1px})
+      max-width: none
+
+  &__stats
+    display: flex
+    gap: $spacing-lg
+    margin-bottom: $spacing-xl
+
+    @media (max-width: #{$breakpoint-s - 1px})
+      flex-direction: column
+      gap: $spacing-md
+      align-items: center
+
+  &__stat
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+
+    @media (max-width: #{$breakpoint-m - 1px})
+      align-items: center
+
+  &__stat-number
+    font-size: 2rem
+    font-weight: $font-bold
+    color: $primary-color
+    line-height: 1
+
+  &__stat-label
+    font-size: 0.875rem
+    color: $gray-300
+    margin-top: $spacing-xs
+
+  &__right
+    display: flex
+    flex-direction: column
+    gap: $spacing-xl
+
+  &__features
+    display: flex
+    flex-direction: column
+    gap: $spacing-lg
+
+  &__feature
+    display: flex
+    align-items: flex-start
+    gap: $spacing-md
+    padding: $spacing-lg
+    background: rgba(255, 255, 255, 0.05)
+    border-radius: $radius-lg
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    transition: all $transition-duration $transition-smooth
+
+    &:hover
+      background: rgba(255, 255, 255, 0.1)
+      transform: translateY(-2px)
+
+  &__feature-icon
+    font-size: 1.5rem
+    background: rgba(0, 212, 170, 0.1)
+    padding: $spacing-sm
+    border-radius: $radius-md
+    border: 1px solid rgba(0, 212, 170, 0.2)
+    flex-shrink: 0
+
+  &__feature-content
+    display: flex
+    flex-direction: column
+    gap: $spacing-xs
+
+  &__feature-title
+    font-weight: $font-semibold
+    color: $white
     font-size: 1rem
-    color: $text-color
-    font-weight: 700
-    @include tablet-version
-      font-size: 1.5rem
-  &__text
-    margin-top: 19px
-    margin-bottom: 0
-    font-size: 0.9rem
-    @include tablet-version
-      font-size: 1.2rem
+
+  &__feature-text
+    color: $gray-300
+    font-size: 0.875rem
+
+  &__actions
+    display: flex
+    gap: $spacing-md
+    flex-wrap: wrap
+
+    @media (max-width: #{$breakpoint-s - 1px})
+      flex-direction: column
+      gap: $spacing-sm
+
+  &__cta-primary
+    background: $primary-gradient
+    color: $white
+    border: none
+    padding: $spacing-md $spacing-lg
+    border-radius: $radius-md
+    font-weight: $font-semibold
+    font-size: 1rem
+    cursor: pointer
+    transition: all $transition-duration $transition-smooth
+    box-shadow: $button-shadow
+    display: flex
+    align-items: center
+    gap: $spacing-xs
+    width: 100%
+    justify-content: center
+
+    @media (min-width: #{$breakpoint-s})
+      width: auto
+
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4)
+
+  &__cta-icon
+    font-size: 1.2rem
+    transition: transform $transition-duration $transition-smooth
+
+  &__trust
+    display: flex
+    flex-direction: column
+    gap: $spacing-md
+    padding-top: $spacing-lg
+    border-top: 1px solid rgba(255, 255, 255, 0.1)
+
+  &__trust-text
+    color: $gray-300
+    font-size: 0.875rem
+
+  &__trust-badges
+    display: flex
+    gap: $spacing-sm
+    flex-wrap: wrap
+
+  &__trust-badge
+    background: rgba(255, 255, 255, 0.05)
+    color: $gray-200
+    padding: $spacing-xs $spacing-sm
+    border-radius: $radius-sm
+    font-size: 0.75rem
+    font-weight: $font-medium
+    border: 1px solid rgba(255, 255, 255, 0.1)
