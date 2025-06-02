@@ -1,5 +1,17 @@
 # Деплой в GitHub Pages
 
+## 🚀 Важные обновления для GitHub Pages
+
+### Исправление роутинга (v2.1.0)
+- **Проблема**: GitHub Pages не поддерживает `BrowserRouter` для client-side роутинга
+- **Решение**: Заменили `BrowserRouter` на `HashRouter` в `src/app/App.jsx`
+- **Результат**: Теперь все роуты работают корректно на GitHub Pages
+
+### URL структура:
+- **Главная**: `https://cuzulique.github.io/Argent-Bank/#/`
+- **Логин**: `https://cuzulique.github.io/Argent-Bank/#/login`
+- **Профиль**: `https://cuzulique.github.io/Argent-Bank/#/profile`
+
 ## Работа с ветками деплоя
 
 ### Создание и переключение на ветку ver_2:
