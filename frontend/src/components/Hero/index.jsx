@@ -5,35 +5,34 @@ function Hero() {
     <section className='hero'>
       <div className='hero__overlay'></div>
       <div className='hero__container'>
-        <div className='hero__left'>
-          <div className='hero__badge'>
-            <span>✨ Trusted by 10,000+ customers</span>
+        <div className='hero__left'>          <div className='hero__badge'>
+            <span>✨ Your Banking Partner</span>
           </div>
 
           <h1 className='hero__title'>
-            Your trusted
-            <span className='hero__title--gradient'> financial</span>
+            Welcome to
+            <span className='hero__title--gradient'> Argent</span>
             <br />
-            partner for life
+            Bank
           </h1>
 
           <p className='hero__subtitle'>
-            Experience modern banking with no hidden fees, competitive rates, and 24/7 security.
-            Join thousands who trust us with their financial future.
+            Experience modern banking with transparent services, competitive rates, and reliable security.
+            Join our community of satisfied customers.
           </p>
 
           <div className='hero__stats'>
             <div className='hero__stat'>
-              <span className='hero__stat-number'>$2.5B+</span>
-              <span className='hero__stat-label'>Assets secured</span>
+              <span className='hero__stat-number'>Secure</span>
+              <span className='hero__stat-label'>Banking Solutions</span>
             </div>
             <div className='hero__stat'>
-              <span className='hero__stat-number'>10K+</span>
-              <span className='hero__stat-label'>Happy customers</span>
+              <span className='hero__stat-number'>24/7</span>
+              <span className='hero__stat-label'>Customer Support</span>
             </div>
             <div className='hero__stat'>
-              <span className='hero__stat-number'>99.9%</span>
-              <span className='hero__stat-label'>Uptime guarantee</span>
+              <span className='hero__stat-number'>Fast</span>
+              <span className='hero__stat-label'>Service Delivery</span>
             </div>
           </div>
         </div>
@@ -61,20 +60,19 @@ function Hero() {
                 <span className='hero__feature-text'>No hidden charges</span>
               </div>
             </div>
-          </div>
-          <div className='hero__actions'>
+          </div>          <div className='hero__actions'>
             <button className='hero__cta-primary'>
-              Open Account Today
+              Get Started
               <span className='hero__cta-icon'>→</span>
             </button>
           </div>
 
           <div className='hero__trust'>
-            <span className='hero__trust-text'>Trusted by leading organizations</span>
+            <span className='hero__trust-text'>Reliable banking services</span>
             <div className='hero__trust-badges'>
-              <div className='hero__trust-badge'>FDIC Insured</div>
-              <div className='hero__trust-badge'>SOC 2 Certified</div>
-              <div className='hero__trust-badge'>ISO 27001</div>
+              <div className='hero__trust-badge'>Secure</div>
+              <div className='hero__trust-badge'>Verified</div>
+              <div className='hero__trust-badge'>Professional</div>
             </div>
           </div>
         </div>
